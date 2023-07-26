@@ -1,0 +1,27 @@
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.metrics import mean_squared_error
+
+# Step 1: Data Collection (assuming you have a CSV file named "wine_quality_dataset.csv")
+data = pd.read_csv('wine_quality_dataset.csv')
+
+# Step 2: Data Preprocessing
+X = data.drop('quality', axis=1)
+y = data['quality']
+
+# Step 3: Exploratory Data Analysis (EDA) [Optional]
+
+# Step 4: Model Selection
+model = RandomForestRegressor()
+
+# Step 5: Train the Model
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+model.fit(X_train, y_train)
+
+# Step 6: Prediction
+predictions = model.predict(X_test)
+
+# Evaluate the model
+mse = mean_squared_error(y_test, predictions)
+print("Mean Squared Error:", mse)
